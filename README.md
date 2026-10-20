@@ -1,6 +1,6 @@
 # Home Brew Bench
 
-Research-based buying guides for home coffee gear: grinders, espresso machines and grinders, kettles, scales, pour-over, French press, moka pots, cold brew, milk frothers and gifts.
+Research-based buying guides for home coffee gear: grinders, drip coffee makers, espresso machines and grinders, kettles, scales, pour-over, French press, moka pots, cold brew, milk frothers, coffee canisters, travel brewers, gifts and stocking stuffers.
 
 The site is served from this repository with GitHub Pages. Open `index.html` for the list of guides.
 
