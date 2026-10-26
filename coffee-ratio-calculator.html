@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coffee Ratio Calculator: Grams of Coffee and Water for Any Brew Method</title>
+<meta name="description" content="Free coffee ratio calculator. Enter how much coffee you want to make and get grams of coffee and water for pour-over, drip, French press, AeroPress, moka pot, cold brew and espresso, with a grind-size cheat sheet.">
+<link rel="canonical" href="https://jarvissross.github.io/home-brew-bench/coffee-ratio-calculator.html">
+<meta property="og:url" content="https://jarvissross.github.io/home-brew-bench/coffee-ratio-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coffee Ratio Calculator: Grams of Coffee and Water for Any Brew Method">
+<meta property="og:description" content="Enter your cup size, pick a brew method, get grams of coffee and water. Includes a grind-size cheat sheet.">
+<meta property="og:site_name" content="Home Brew Bench">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232b4a3a'/%3E%3Cpath d='M14 24h30v14a12 12 0 0 1-12 12h-6a12 12 0 0 1-12-12z' fill='%23f3e9dc'/%3E%3Cpath d='M44 28h4a6 6 0 0 1 0 12h-4' fill='none' stroke='%23f3e9dc' stroke-width='4'/%3E%3Cpath d='M22 12c0 4 4 4 4 8M30 12c0 4 4 4 4 8' fill='none' stroke='%23f3e9dc' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  body{font-family:Georgia,"Times New Roman",serif;max-width:780px;margin:0 auto;padding:24px 18px 60px;line-height:1.65;color:#222;background:#fff}
+  h1{font-size:2rem;line-height:1.2;margin-bottom:.3em}
+  h2{margin-top:2em;border-bottom:2px solid #eee;padding-bottom:.2em}
+  .meta{color:#666;font-size:.9rem}
+  .disclosure{background:#fff8e1;border:1px solid #f0d27a;padding:12px 16px;border-radius:6px;font-size:.92rem;margin:16px 0 24px}
+  .calc{background:#f5f7fa;border-radius:8px;padding:18px 20px;font-family:Arial,sans-serif}
+  .row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .row label{flex:1 1 200px;font-size:.9rem;font-weight:bold}
+  .row select,.row input{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px;font-size:1rem;border:1px solid #bbb;border-radius:5px}
+  .out{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+  .box{flex:1 1 150px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center}
+  .box b{display:block;font-size:1.7rem;color:#2b4a3a}
+  .box span{font-size:.82rem;color:#555}
+  #tip{font-size:.92rem;margin-top:12px;color:#333}
+  table{border-collapse:collapse;width:100%;font-size:.88rem;margin:16px 0;display:block;overflow-x:auto}
+  th,td{border:1px solid #ddd;padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0}
+  .note{font-size:.88rem;color:#555}
+</style>
+</head>
+<body>
+
+<p class="meta"><a href="index.html">Home Brew Bench</a> · <a href="about.html">About &amp; disclosure</a> · Last updated: October 26, 2026</p>
+<h1>Coffee Ratio Calculator</h1>
+
+<div class="disclosure">
+  <strong>Disclosure:</strong> Home Brew Bench is not in any affiliate program at the moment and earns nothing from this page. If that changes, the guides this page links to will say so at the top. This tool and page were written with AI assistance. The ratios are common published starting points, not results from our own testing; adjust them to your taste.
+</div>
+
+<p>Recipes work best by weight, not scoops. Choose a brew method, enter how much coffee you want to end up with, and the calculator gives you grams of coffee and grams of water. A digital scale makes this easy: 1 gram of water is about 1 milliliter.</p>
+
+<div class="calc">
+  <div class="row">
+    <label>Brew method
+      <select id="method"></select>
+    </label>
+    <label>Unit
+      <select id="unit">
+        <option value="ml">Milliliters of water</option>
+        <option value="oz">US fluid ounces of water</option>
+        <option value="cups">Cups (6 fl oz each)</option>
+        <option value="dose">Grams of coffee I have</option>
+      </select>
+    </label>
+    <label>Amount
+      <input id="amt" type="number" min="1" step="any" value="500">
+    </label>
+  </div>
+  <div class="row">
+    <label>Strength (moka pot: fixed by basket)
+      <select id="strength">
+        <option value="-1">Stronger</option>
+        <option value="0" selected>Standard</option>
+        <option value="1">Lighter</option>
+      </select>
+    </label>
+  </div>
+  <div class="out">
+    <div class="box"><b id="oc">-</b><span>grams of coffee</span></div>
+    <div class="box"><b id="ow">-</b><span>grams (ml) of water</span></div>
+    <div class="box"><b id="or">-</b><span>ratio, coffee : water</span></div>
+    <div class="box"><b id="og">-</b><span>grind</span></div>
+  </div>
+  <p id="tip"></p>
+</div>
+
+<p class="note">Rough scoop equivalents vary with bean and grind, so we don't give them. Weighing is the reliable route.</p>
+
+<h2>Starting ratios used here</h2>
+<p>These are widely published starting points (the Specialty Coffee Association's "Golden Cup" guidance is roughly 55 grams of coffee per liter, about 1:18; many brewers prefer 1:15 to 1:17 for pour-over). Treat them as a first draft recipe and change one thing at a time.</p>
+<table>
+  <tr><th>Method</th><th>Standard ratio (coffee : water)</th><th>Grind</th><th>Notes</th></tr>
+  <tr><td>Pour-over (V60, Kalita, Chemex)</td><td>1 : 16</td><td>Medium-fine to medium</td><td>Slower drain tastes stronger and can turn bitter; coarsen the grind to speed it up.</td></tr>
+  <tr><td>Drip machine</td><td>1 : 16</td><td>Medium</td><td>Use the machine's water markings as a rough guide and check by weight once.</td></tr>
+  <tr><td>French press</td><td>1 : 15</td><td>Coarse</td><td>Common steep time is around 4 minutes.</td></tr>
+  <tr><td>AeroPress</td><td>1 : 14</td><td>Medium-fine</td><td>Recipes vary widely; this is a mid-range starting point.</td></tr>
+  <tr><td>Moka pot</td><td>Fill basket, water to the valve</td><td>Fine (coarser than espresso)</td><td>Ratio is set by the basket size. The calculator shows 1 : 10 as a rough reference for the water you'd use.</td></tr>
+  <tr><td>Cold brew concentrate</td><td>1 : 5</td><td>Coarse</td><td>Dilute with water or milk to taste; steep 12 to 18 hours in the fridge.</td></tr>
+  <tr><td>Cold brew, ready to drink</td><td>1 : 12</td><td>Coarse</td><td>No dilution needed. Adjust to taste.</td></tr>
+  <tr><td>Espresso</td><td>1 : 2 (brew ratio by yield)</td><td>Fine, adjusted to taste</td><td>Water here means liquid espresso in the cup. Machines use more water than the yield.</td></tr>
+</table>
+
+<h2>Grind size cheat sheet</h2>
+<table>
+  <tr><th>Grind</th><th>Looks like</th><th>Use for</th></tr>
+  <tr><td>Extra fine</td><td>Powder</td><td>Turkish coffee</td></tr>
+  <tr><td>Fine</td><td>Table salt or finer</td><td>Espresso, moka pot</td></tr>
+  <tr><td>Medium-fine</td><td>Between salt and sand</td><td>AeroPress, V60, Kalita Wave</td></tr>
+  <tr><td>Medium</td><td>Sand</td><td>Flat-bottom drippers, drip machines, Chemex (slightly coarser)</td></tr>
+  <tr><td>Coarse</td><td>Sea salt flakes</td><td>French press, cold brew</td></tr>
+</table>
+<p><strong>Taste rule of thumb:</strong> sour or thin cup, grind finer or brew a little longer; bitter or harsh, grind coarser or shorten the brew. If it's just too strong or weak, change the ratio, not the grind.</p>
+
+<h2>Gear that helps with this</h2>
+<p>Our research-based guides cover the tools the calculator assumes:</p>
+<ul>
+  <li><a href="articles/best-coffee-scale.html">Best coffee scale with a timer</a></li>
+  <li><a href="articles/best-coffee-grinders-under-200.html">Best coffee grinders under $200</a></li>
+  <li><a href="articles/best-gooseneck-kettle.html">Best gooseneck kettle</a></li>
+  <li><a href="articles/best-water-for-coffee.html">Best water for coffee</a></li>
+  <li><a href="articles/best-pour-over-coffee-maker.html">Best pour-over coffee maker</a></li>
+  <li><a href="articles/best-french-press.html">Best French press</a></li>
+  <li><a href="articles/best-moka-pot.html">Best moka pot</a></li>
+  <li><a href="articles/best-cold-brew-maker.html">Best cold brew maker</a></li>
+  <li><a href="articles/how-to-clean-a-coffee-grinder.html">How to clean a coffee grinder</a></li>
+</ul>
+
+<p class="note">Product and brand names mentioned on this site belong to their owners and are used only to identify products. Home Brew Bench is not affiliated with them.</p>
+
+<script>
+var M=[
+ {n:"Pour-over (V60, Kalita, Chemex)",r:16,g:"Medium-fine to medium",t:"Bloom with about twice the coffee's weight in water, then pour in stages."},
+ {n:"Drip machine",r:16,g:"Medium",t:"Weigh water once to see how your machine's markings compare."},
+ {n:"French press",r:15,g:"Coarse",t:"Steep about 4 minutes, press slowly, pour out right away so it doesn't keep extracting."},
+ {n:"AeroPress",r:14,g:"Medium-fine",t:"Many recipes use a smaller dose with a splash of hot water after pressing; explore from here."},
+ {n:"Moka pot",r:10,g:"Fine (coarser than espresso)",t:"Fill the basket level without tamping and fill water to just under the valve. The result is a strong, concentrated cup."},
+ {n:"Cold brew concentrate",r:5,g:"Coarse",t:"Steep 12 to 18 hours in the fridge, filter, then dilute about 1:1 with water or milk."},
+ {n:"Cold brew, ready to drink",r:12,g:"Coarse",t:"Steep 12 to 18 hours in the fridge and filter well."},
+ {n:"Espresso (water = liquid yield)",r:2,g:"Fine, adjusted to taste",t:"Here water means the liquid in the cup, not what the machine uses. Dose and yield are usually weighed to the 0.1 g."}
+];
+var s=document.getElementById("method");
+M.forEach(function(m,i){var o=document.createElement("option");o.value=i;o.textContent=m.n;s.appendChild(o);});
+function calc(){
+ var m=M[+s.value],a=parseFloat(document.getElementById("amt").value),u=document.getElementById("unit").value,sh=+document.getElementById("strength").value;
+ var r=m.r;
+ if(m.n.indexOf("Espresso")>=0)r=m.r+sh*0.25;
+ else if(m.n.indexOf("concentrate")>=0)r=m.r+sh*0.5;
+ else if(m.n.indexOf("Moka")<0)r=m.r+sh;
+ if(!(a>0)){["oc","ow","or","og"].forEach(function(k){document.getElementById(k).textContent="-"});return;}
+ var w,c;
+ if(u==="dose"){c=a;w=a*r;}
+ else{w=u==="ml"?a:u==="oz"?a*29.5735:a*6*29.5735;c=w/r;}
+ document.getElementById("oc").textContent=c.toFixed(1);
+ document.getElementById("ow").textContent=Math.round(w);
+ document.getElementById("or").textContent="1 : "+(Math.round(r*100)/100);
+ document.getElementById("og").textContent=m.g;
+ document.getElementById("tip").textContent=m.t;
+}
+["method","unit","amt","strength"].forEach(function(id){document.getElementById(id).addEventListener("input",calc);});
+calc();
+</script>
+</body>
+</html>
