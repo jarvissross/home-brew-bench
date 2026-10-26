@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coffee Taste Troubleshooter: Fix Sour, Bitter, Weak or Harsh Coffee</title>
+<meta name="description" content="Free coffee troubleshooter. Pick your brew method and what your cup tastes like (sour, bitter, weak, muddy, flat) and get an ordered list of fixes for grind, ratio, water temperature and brew time.">
+<link rel="canonical" href="https://jarvissross.github.io/home-brew-bench/coffee-taste-troubleshooter.html">
+<meta property="og:url" content="https://jarvissross.github.io/home-brew-bench/coffee-taste-troubleshooter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coffee Taste Troubleshooter: Fix Sour, Bitter, Weak or Harsh Coffee">
+<meta property="og:description" content="Pick your brew method and what your coffee tastes like and get ordered fixes.">
+<meta property="og:site_name" content="Home Brew Bench">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232b4a3a'/%3E%3Cpath d='M14 24h30v14a12 12 0 0 1-12 12h-6a12 12 0 0 1-12-12z' fill='%23f3e9dc'/%3E%3Cpath d='M44 28h4a6 6 0 0 1 0 12h-4' fill='none' stroke='%23f3e9dc' stroke-width='4'/%3E%3Cpath d='M22 12c0 4 4 4 4 8M30 12c0 4 4 4 4 8' fill='none' stroke='%23f3e9dc' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  body{font-family:Georgia,"Times New Roman",serif;max-width:780px;margin:0 auto;padding:24px 18px 60px;line-height:1.65;color:#222;background:#fff}
+  h1{font-size:2rem;line-height:1.2;margin-bottom:.3em}
+  h2{margin-top:2em;border-bottom:2px solid #eee;padding-bottom:.2em}
+  .meta{color:#666;font-size:.9rem}
+  .disclosure{background:#fff8e1;border:1px solid #f0d27a;padding:12px 16px;border-radius:6px;font-size:.92rem;margin:16px 0 24px}
+  .calc{background:#f5f7fa;border-radius:8px;padding:18px 20px;font-family:Arial,sans-serif}
+  .row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .row label{flex:1 1 220px;font-size:.9rem;font-weight:bold}
+  .row select{display:block;width:100%;box-sizing:border-box;margin-top:4px;padding:8px;font-size:1rem;border:1px solid #bbb;border-radius:5px}
+  #result{background:#fff;border:1px solid #ddd;border-radius:8px;padding:6px 14px 6px 8px;margin-top:6px}
+  #result li{margin-bottom:.5em}
+  .note{font-size:.88rem;color:#555}
+</style>
+</head>
+<body>
+
+<p class="meta"><a href="index.html">Home Brew Bench</a> · <a href="about.html">About &amp; disclosure</a> · Last updated: October 26, 2026</p>
+<h1>Coffee Taste Troubleshooter</h1>
+
+<div class="disclosure">
+  <strong>Disclosure:</strong> Home Brew Bench is not in any affiliate program at the moment and earns nothing from this page. If that changes, the guides this page links to will say so at the top. This tool and page were written with AI assistance. The advice reflects widely published brewing guidance, such as the Specialty Coffee Association's brewing recommendations, not our own testing. Taste is personal; treat every suggestion as a starting point.
+</div>
+
+<p>Pick how you brew and what the cup tastes like. You get a short list of fixes in the order worth trying. <strong>Change one thing at a time</strong>, or you will not know which change helped.</p>
+
+<div class="calc">
+  <div class="row">
+    <label>Brew method
+      <select id="method"></select>
+    </label>
+    <label>What does the cup taste like?
+      <select id="taste"></select>
+    </label>
+  </div>
+  <div id="result"></div>
+</div>
+
+<h2>Why these fixes work</h2>
+<p>Brewing pulls flavors out of ground coffee in a rough order: acids and light fruity notes first, sweetness next, then the heavier, drying, bitter compounds. <strong>Under-extracted</strong> coffee stops too early and tastes sour, thin or salty. <strong>Over-extracted</strong> coffee runs too long and tastes bitter, harsh or hollow. Grind size, water temperature, brew time and agitation push extraction up or down; the coffee-to-water ratio mainly changes how strong the cup is.</p>
+
+<h2>Water temperature</h2>
+<p>The SCA's brewing recommendation is water at about 195 to 205 °F (90.5 to 96 °C) as it meets the coffee. Hotter water extracts faster, so lighter roasts often like the top of that range, and darker roasts, which extract easily, often taste better a little cooler. A kettle with a temperature setting makes this repeatable; without one, letting a just-boiled kettle rest for 30 to 60 seconds is a common way to land in range. Cold brew is the exception: it uses time instead of heat.</p>
+
+<h2>Gear that helps with this</h2>
+<ul>
+  <li><a href="coffee-ratio-calculator.html">Coffee ratio calculator</a> (get the dose right first)</li>
+  <li><a href="articles/best-coffee-scale.html">Best coffee scale with a timer</a></li>
+  <li><a href="articles/best-coffee-grinders-under-200.html">Best coffee grinders under $200</a></li>
+  <li><a href="articles/burr-vs-blade-grinder.html">Burr vs blade grinder</a></li>
+  <li><a href="articles/best-gooseneck-kettle.html">Best gooseneck kettle</a></li>
+  <li><a href="articles/best-water-for-coffee.html">Best water for coffee</a></li>
+  <li><a href="articles/how-to-clean-a-coffee-grinder.html">How to clean a coffee grinder</a></li>
+</ul>
+
+<p class="note">Product and brand names mentioned on this site belong to their owners and are used only to identify products. Home Brew Bench is not affiliated with them.</p>
+
+<script>
+var METHODS={
+ pour:{n:"Pour-over (V60, Kalita, Chemex)",cold:0,fine:"a notch finer",coarse:"a notch coarser",time:"a total brew time of roughly 2:30 to 3:30 for a single cup"},
+ drip:{n:"Drip machine",cold:0,fine:"a notch finer",coarse:"a notch coarser",time:"a brew that finishes in a few minutes"},
+ press:{n:"French press",cold:0,fine:"a little finer (but not so fine the plunger is hard to push)",coarse:"coarser",time:"a steep of about 4 minutes"},
+ aero:{n:"AeroPress",cold:0,fine:"finer",coarse:"coarser",time:"a total contact time of 1 to 2 minutes"},
+ moka:{n:"Moka pot",cold:0,fine:"slightly finer",coarse:"slightly coarser",time:"taking it off the heat as soon as it starts to sputter"},
+ cold:{n:"Cold brew",cold:1,fine:"a little finer",coarse:"coarser",time:"a steep of about 12 to 18 hours"},
+ esp:{n:"Espresso machine",cold:0,fine:"finer",coarse:"coarser",time:"a shot of roughly 25 to 35 seconds, a common starting window"}
+};
+var TASTES={
+ sour:{n:"Sour, sharp or salty (under-extracted)",steps:function(m){return[
+  "Grind "+m.fine+".",
+  m.cold?"Steep longer, toward the 18 hour end.":"Use hotter water, toward 205 °F / 96 °C, and aim for "+m.time+".",
+  "Stir or swirl more so all the grounds get wet evenly.",
+  "Check freshness; stale or very lightly roasted beans can also taste sharp."]}},
+ bitter:{n:"Bitter, harsh or drying (over-extracted)",steps:function(m){return[
+  "Grind "+m.coarse+".",
+  m.cold?"Steep for less time, toward 12 hours.":"Lower the water temperature a little, toward 195 °F / 90 °C, and don't run past "+m.time+".",
+  "Reduce stirring or agitation.",
+  "Clean the grinder and brewer. Old coffee oils taste bitter; see the grinder cleaning guide below."]}},
+ weak:{n:"Weak or watery",steps:function(m){return[
+  "Use more coffee for the same water (try a stronger ratio in the calculator). A weak but pleasant cup is a ratio problem, not a grind problem.",
+  "If it is weak and also sour or hollow, grind "+m.fine+" as well.",
+  "Weigh coffee and water instead of using scoops."]}},
+ strong:{n:"Too strong or intense, but clean",steps:function(m){return[
+  "Use less coffee for the same water, or add hot water to the finished cup.",
+  "Keep the grind the same until the strength is right, then fine-tune."]}},
+ muddy:{n:"Muddy, silty or gritty",steps:function(m){return[
+  "Grind "+m.coarse+", and avoid blade grinders, which make a lot of fine dust.",
+  "Use a paper filter, or let a French press settle for a minute and pour slowly.",
+  "Leave the last bit in the pot or carafe."]}},
+ flat:{n:"Flat or dull, no sweetness",steps:function(m){return[
+  "Check freshness: beans are typically best within a few weeks of the roast date.",
+  "Try water that is neither very soft nor very hard; see the water guide below.",
+  m.cold?"Cold brew is naturally mellow; try a slightly longer steep or a finer grind.":"Make sure the water is hot enough, toward 205 °F / 96 °C."]}}
+};
+var ms=document.getElementById("method"),ts=document.getElementById("taste"),box=document.getElementById("result");
+function fill(sel,obj){for(var k in obj){var o=document.createElement("option");o.value=k;o.textContent=obj[k].n;sel.appendChild(o);}}
+fill(ms,METHODS);fill(ts,TASTES);
+function show(){
+ var steps=TASTES[ts.value].steps(METHODS[ms.value]);
+ box.innerHTML="";
+ var ol=document.createElement("ol");
+ steps.forEach(function(s){var li=document.createElement("li");li.textContent=s;ol.appendChild(li);});
+ box.appendChild(ol);
+}
+ms.addEventListener("input",show);ts.addEventListener("input",show);show();
+</script>
+</body>
+</html>
